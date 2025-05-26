@@ -1,0 +1,52 @@
+Aim:
+To apply the Expectation-Maximization (EM) algorithm and K-Means algorithm to cluster a dataset stored in a .csv file and compare their results.
+
+---
+
+Algorithm (Short):
+1. Load dataset from CSV using Pandas.
+2. Apply K-Means clustering.
+3. Apply EM clustering using Gaussian Mixture Model.
+4. Print and compare labels for both methods.
+
+---
+
+Sample Dataset (cluster.csv):
+
+x,y
+1.0,2.0
+1.5,1.8
+5.0,8.0
+8.0,8.0
+1.0,0.6
+9.0,11.0
+8.0,2.0
+10.0,2.0
+9.0,3.0
+
+---
+
+Short Python Program:
+
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
+
+data = pd.read_csv("cluster.csv")
+
+kmeans = KMeans(n_clusters=2).fit(data)
+em = GaussianMixture(n_components=2).fit(data)
+
+print("K-Means:", kmeans.labels_)
+print("EM     :", em.predict(data))
+
+---
+
+Sample Output:
+K-Means: [1 1 0 0 1 0 0 0 0]
+EM     : [1 1 0 0 1 0 0 0 0]
+
+---
+
+Result:
+The EM and K-Means clustering algorithms were applied to the same dataset. Their cluster assignments were printed. In this example, both algorithms produced similar clusters.
