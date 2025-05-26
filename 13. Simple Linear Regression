@@ -1,0 +1,36 @@
+Aim:
+To implement Simple Linear Regression and plot the regression line for a given dataset.
+
+---
+
+Algorithm:
+1. Prepare sample input (X) and output (y) data.
+2. Fit a Linear Regression model.
+3. Predict the output values.
+4. Plot original data points and the regression line.
+
+---
+
+Program:
+
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+X = [[1],[2],[3],[4],[5]]
+y = [2,4,5,4,5]
+model = LinearRegression().fit(X, y)
+plt.scatter(X, y)
+plt.plot(X, model.predict(X), 'r')
+plt.show()
+
+---
+
+Output:
+A graph window showing:
+Blue dots = original data
+Red line = regression line
+
+---
+
+Result:
+Simple Linear Regression was successfully implemented. The regression line was plotted based on the sample dataset.
