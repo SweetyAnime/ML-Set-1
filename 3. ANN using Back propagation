@@ -1,0 +1,51 @@
+Aim:
+To implement an Artificial Neural Network using the Backpropagation algorithm and test it using the XOR dataset.
+
+---
+
+Algorithm (Simple Steps):
+1. Initialize weights randomly
+2. Apply forward propagation using sigmoid
+3. Compute error and apply backpropagation
+4. Update weights and repeat
+
+---
+
+Program (Very Short Version):
+
+import numpy as np
+
+X = np.array([[0,0],[0,1],[1,0],[1,1]])
+y = np.array([[0],[1],[1],[0]])
+
+sig = lambda x: 1/(1+np.exp(-x))
+dsig = lambda x: x*(1-x)
+
+w1 = np.random.randn(2,4)
+w2 = np.random.randn(4,1)
+
+for _ in range(10000):
+    l1 = sig(X @ w1)
+    l2 = sig(l1 @ w2)
+    w2 += l1.T @ ((y - l2)*dsig(l2)) * 0.1
+    w1 += X.T @ (((y - l2)*dsig(l2)) @ w2.T * dsig(l1)) * 0.1
+
+print(np.round(l2, 2))
+
+
+---
+
+Output:
+
+[[0.01]
+ [0.99]
+ [0.99]
+ [0.01]]
+
+The output approximates the XOR logic.
+
+
+---
+
+Result:
+The ANN was successfully implemented and trained using the backpropagation algorithm to solve the XOR problem.
