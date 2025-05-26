@@ -14,20 +14,34 @@ Algorithm:
 
 Program:
 
-from sklearn.datasets import fetch_20newsgroups
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.preprocessing import LabelEncoder
 
-data = fetch_20newsgroups(subset='train', categories=['sci.space', 'rec.sport.baseball'])
-X = TfidfVectorizer(stop_words='english').fit_transform(data.data)
-model = MultinomialNB().fit(X, data.target)
+data = pd.read_csv("textdata.csv")
+X = TfidfVectorizer().fit_transform(data["text"])
+y = LabelEncoder().fit_transform(data["label"])
+
+model = MultinomialNB().fit(X, y)
 pred = model.predict(X)
-print("Acc:", accuracy_score(data.target, pred))
-print("Prec:", precision_score(data.target, pred))
-print("Rec:", recall_score(data.target, pred))
 
+print("Acc:", accuracy_score(y, pred))
+print("Prec:", precision_score(y, pred))
+print("Rec:", recall_score(y, pred))
 ---
+textdata.csv:
+
+text,label
+"I love watching baseball games",sport
+"The Hubble telescope discovered a new planet",space
+"Baseball players are training hard",sport
+"NASA is launching a new rocket",space
+"Pitching and batting are baseball skills",sport
+"SpaceX mission was a success",space
+
+-----
 
 Output:
 
